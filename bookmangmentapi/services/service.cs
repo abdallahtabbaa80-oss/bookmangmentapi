@@ -1,6 +1,7 @@
 ﻿using bookmangmentapi.models;
 using bookmangmentapi.data;
 using System.Net.Http;
+using System.Net;
 //using System.Threading.Tasks;   
 using System.Text.Json;
 namespace bookmangmentapi.services
@@ -53,6 +54,10 @@ namespace bookmangmentapi.services
                         }
                     }
                     return "No description found for the provided ISBN.";
+                }
+                else if (response.StatusCode == HttpStatusCode.TooManyRequests)
+                {
+                    return "Google Books API quota exceeded. External details are temporarily unavailable.";
                 }
                 else
                 {

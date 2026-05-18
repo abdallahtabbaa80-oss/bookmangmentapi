@@ -65,7 +65,16 @@ namespace bookmangmentapi.Controllers
             if (model.HasSearched)
             {
                 model.Results = Data.GetByIsbn(isbn!, version);
-                await EnsureAdditionalDetailsAsync(model.Results);
+
+                if (model.Results.Any())
+                {
+                    model.ResultSource = "Local";
+                }
+                else
+                {
+                    model.ResultSource = "Google Books API";
+                    model.ExternalDetails = await _service.GetBooksdescriptionAsync(isbn!);
+                }
             }
 
             return View(model);

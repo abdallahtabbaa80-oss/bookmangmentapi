@@ -33,12 +33,23 @@
     <section class="content-panel">
         <div class="panel-title-row">
             <h2 class="h5 mb-0">Results</h2>
-            <span class="badge text-bg-light">@Model.Results.Count found</span>
+            @if (Model.ResultSource == "Local")
+            {
+                <span class="badge text-bg-success">Local data</span>
+            }
+            else if (Model.ResultSource == "Google Books API")
+            {
+                <span class="badge text-bg-info">Google Books API</span>
+            }
         </div>
 
         @if (!Model.Results.Any())
         {
-            <p class="text-muted mb-0">No books matched that ISBN and version.</p>
+            <div class="external-result">
+                <p class="text-muted mb-2">No local book matched that ISBN and version.</p>
+                <h3 class="h6 mb-2">External details from Google Books API</h3>
+                <p class="details-cell mb-0">@Model.ExternalDetails</p>
+            </div>
         }
         else
         {
