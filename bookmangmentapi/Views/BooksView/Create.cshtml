@@ -1,0 +1,52 @@
+@model Book
+@{
+    ViewData["Title"] = "Add Book";
+}
+
+<section class="page-heading">
+    <div>
+        <p class="text-uppercase text-muted small fw-semibold mb-1">Catalog</p>
+        <h1 class="h2 mb-1">Add Book</h1>
+    </div>
+</section>
+
+<section class="form-panel">
+    <form asp-action="Create" method="post" class="row g-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="col-md-6">
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-control" required />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Author" class="form-label"></label>
+            <input asp-for="Author" class="form-control" required />
+            <span asp-validation-for="Author" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="YearPublished" class="form-label">Year Published</label>
+            <input asp-for="YearPublished" class="form-control" type="number" />
+            <span asp-validation-for="YearPublished" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="isbn" class="form-label">ISBN</label>
+            <input asp-for="isbn" class="form-control" required />
+            <span asp-validation-for="isbn" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="version" class="form-label">Version</label>
+            <input asp-for="version" class="form-control" type="number" min="1" />
+            <span asp-validation-for="version" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 form-actions">
+            <a class="btn btn-outline-secondary" asp-controller="BooksView" asp-action="List">Cancel</a>
+            <button class="btn btn-primary" type="submit">Create</button>
+        </div>
+    </form>
+</section>

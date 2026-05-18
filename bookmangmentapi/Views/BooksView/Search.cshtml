@@ -1,0 +1,81 @@
+@model BookSearchViewModel
+@{
+    ViewData["Title"] = "Search ISBN";
+}
+
+<section class="page-heading">
+    <div>
+        <p class="text-uppercase text-muted small fw-semibold mb-1">Lookup</p>
+        <h1 class="h2 mb-1">Search by ISBN</h1>
+    </div>
+</section>
+
+<section class="form-panel mb-4">
+    <form asp-action="Search" method="get" class="row g-3 align-items-end">
+        <div class="col-md-7">
+            <label asp-for="Isbn" class="form-label">ISBN</label>
+            <input asp-for="Isbn" class="form-control" required />
+        </div>
+
+        <div class="col-md-3">
+            <label asp-for="Version" class="form-label">Version</label>
+            <input asp-for="Version" class="form-control" type="number" min="1" />
+        </div>
+
+        <div class="col-md-2 d-grid">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+</section>
+
+@if (Model.HasSearched)
+{
+    <section class="content-panel">
+        <div class="panel-title-row">
+            <h2 class="h5 mb-0">Results</h2>
+            <span class="badge text-bg-light">@Model.Results.Count found</span>
+        </div>
+
+        @if (!Model.Results.Any())
+        {
+            <p class="text-muted mb-0">No books matched that ISBN and version.</p>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle book-table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Year Published</th>
+                            <th>ISBN</th>
+                            <th>Version</th>
+                            <th>Additional Details</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var book in Model.Results)
+                        {
+                            <tr>
+                                <td>@book.Id</td>
+                                <td>@book.Title</td>
+                                <td>@book.Author</td>
+                                <td>@book.YearPublished</td>
+                                <td>@book.isbn</td>
+                                <td>@book.version</td>
+                                <td class="details-cell">@book.additionalDetails</td>
+                                <td class="text-end action-cell">
+                                    <a class="btn btn-sm btn-outline-primary" asp-controller="BooksView" asp-action="Edit" asp-route-isbn="@book.isbn" asp-route-version="@book.version">Edit</a>
+                                    <a class="btn btn-sm btn-outline-danger" asp-controller="BooksView" asp-action="Delete" asp-route-isbn="@book.isbn" asp-route-version="@book.version">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </section>
+}

@@ -1,0 +1,47 @@
+@model Book
+@{
+    ViewData["Title"] = "Delete Book";
+}
+
+<section class="page-heading">
+    <div>
+        <p class="text-uppercase text-muted small fw-semibold mb-1">Catalog</p>
+        <h1 class="h2 mb-1">Delete Book</h1>
+    </div>
+</section>
+
+<section class="content-panel">
+    <div class="alert alert-warning" role="alert">
+        Delete this version of the book?
+    </div>
+
+    <dl class="row detail-list">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+
+        <dt class="col-sm-3">Title</dt>
+        <dd class="col-sm-9">@Model.Title</dd>
+
+        <dt class="col-sm-3">Author</dt>
+        <dd class="col-sm-9">@Model.Author</dd>
+
+        <dt class="col-sm-3">Year Published</dt>
+        <dd class="col-sm-9">@Model.YearPublished</dd>
+
+        <dt class="col-sm-3">ISBN</dt>
+        <dd class="col-sm-9">@Model.isbn</dd>
+
+        <dt class="col-sm-3">Version</dt>
+        <dd class="col-sm-9">@Model.version</dd>
+
+        <dt class="col-sm-3">Additional Details</dt>
+        <dd class="col-sm-9 details-cell">@Model.additionalDetails</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post" class="form-actions">
+        <input type="hidden" name="isbn" value="@Model.isbn" />
+        <input type="hidden" name="version" value="@Model.version" />
+        <a class="btn btn-outline-secondary" asp-controller="BooksView" asp-action="List">Cancel</a>
+        <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
+</section>
