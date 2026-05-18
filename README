@@ -1,0 +1,83 @@
+# ASP.NET Core Book Management System
+
+A full-stack ASP.NET Core project that combines a REST API with an MVC/Razor UI for managing books.
+
+## Features
+
+- ASP.NET Core Web API
+- MVC / Razor Views UI
+- Swagger API documentation
+- CRUD operations for books
+- Search books by ISBN and version
+- Google Books API integration
+- Layered architecture
+- Async API handling using HttpClient
+
+## Technologies Used
+
+- ASP.NET Core
+- C#
+- MVC / Razor Views
+- REST APIs
+- Swagger
+- Bootstrap
+- HttpClient
+- Google Books API
+
+## Project Structure
+
+- Controllers → API and MVC controllers
+- Services → External API integration logic
+- Models → Data models
+- Data → In-memory data storage
+- Views → MVC UI pages
+
+## API Endpoints
+
+### Get all books
+
+GET /api/book
+
+### Get book by ISBN
+
+GET /api/book/{isbn}
+
+### Get book by ISBN and version
+
+GET /api/book/{isbn}?version=1
+
+### Add a new book
+
+POST /api/book
+
+### Update a book
+
+PUT /api/book/{isbn}
+
+### Delete a book
+
+DELETE /api/book/{isbn}/{version}
+
+## UI Features
+
+- View all books
+- Add books
+- Search by ISBN
+- Edit books
+- Delete books
+
+## Swagger
+
+Swagger is available at:
+
+/swagger
+
+## Notes
+
+The project integrates with Google Books API to fetch additional book details using ISBN numbers.
+
+If Google API quota is exceeded, fallback messages are displayed gracefully.
+
+## Author
+
+Abdallah Altabbaa
